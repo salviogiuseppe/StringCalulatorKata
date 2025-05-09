@@ -27,21 +27,18 @@ public class StringCalculator {
     }
 
     private String extractDelimiter(String numbers) {
-        return numbers.startsWith(CUSTOM_DELIMITER_PREFIX) ? getDelimiter(numbers) : DEFAULT_DELIMITER;
+        if (numbers.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+                String customDelimiter = numbers.split(LINE_BREAK, 2)[0].substring(2);
+                return Pattern.quote(customDelimiter);
+        } else {
+            return DEFAULT_DELIMITER;
+        }
     }
 
     private String sanitizeNumbers(String numbers) {
         return numbers.startsWith(CUSTOM_DELIMITER_PREFIX)
                 ? numbers.split(LINE_BREAK, 2)[1]
                 : numbers;
-    }
-
-    private String getDelimiter(String numbers) {
-        if (numbers.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-            String customDelimiter = numbers.split(LINE_BREAK, 2)[0].substring(2);
-            return Pattern.quote(customDelimiter);
-        }
-        return DEFAULT_DELIMITER;
     }
 
     private int calculateSum(String[] parts) {

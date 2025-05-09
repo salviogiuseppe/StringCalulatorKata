@@ -105,4 +105,30 @@ Numbers bigger than 1000 should be ignored, so adding 2 + 1001 = 2
         assertEquals(1000, calculator.add("1000,1001"));
     }
 
+
+
+    //aggiungi test per avere coverage al 100%
+    @Test
+    void testAddWithEmptyDelimiter() {
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(0, calculator.add("//;\n"));
+    }
+
+    @Test
+    void testAddWithNullInput() {
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(0, calculator.add(null));
+    }
+
+    @Test
+    void testCalculateSumWithEmptyParts() {
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(0, calculator.add(",\n"));
+    }
+
+    @Test
+    void testCheckNumeriNegativiWithoutException() {
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(3, calculator.add("1,2"));
+    }
 }
